@@ -5,6 +5,11 @@ import Book from "./components/Book";
 
 export default function App() {
   const [books, setBooks] = useState([]);
+  const [form, setForm] = useState({
+    title: "",
+    description: "",
+    status: "",
+  });
 
   //   run getBooks on page load
   useEffect(() => {
@@ -27,7 +32,7 @@ export default function App() {
   async function deleteBook(id) {
     const API = `http://localhost:8080/books/${id}`;
     await axios.delete(API);
-    getBook();
+    getBooks();
   }
 
   function handleChange(event) {
