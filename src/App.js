@@ -4,7 +4,7 @@ import axios from "axios";
 import Home from "../src/pages/Home";
 import About from "../src/pages/About";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import CatPage from "../src/pages/CatPage";
+import BookPage from "../src/pages/BookPage";
 
 export default function App() {
   const [books, setBooks] = useState([]);
