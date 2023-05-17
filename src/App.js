@@ -1,7 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Book from "./components/Book";
+import Home from "../src/pages/Home";
+import About from "../src/pages/About";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import CatPage from "../src/pages/CatPage";
 
 export default function App() {
   const [books, setBooks] = useState([]);
@@ -40,26 +43,17 @@ export default function App() {
   }
 
   return (
-    <div className="App">
-      <h1>Books</h1>
-      <form onSubmit={postBook}>
-        <input name="title" placeholder="title" onChange={handleChange} />
-        <input name="description" placeholder="description" onChange={handleChange} />
-        <input name="status" placeholder="status" onChange={handleChange} />
-        <input type="submit" />
-      </form>
-      <div className="book-wrap">
-        {books.map((book) => {
-          return (
-            <div>
-              <h3>{book.title}</h3>
-              <p>{book.description}</p>
-              <p>{book.status}</p>
-              <button onClick={() => deleteBook(book._id)}>Delete</button>
-            </div>
-          );
-        })}
+    <BrowserRouter>
+      <div className="App">
+        <h1>Books</h1>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Routes>
+          <Route path="/" element={<Home books={books} form={form} handleChange={handleChange} postBook={postBook} deleteBook={deleteBook} />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/books/:id" element={<BookPage />} />
+        </Routes>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
